@@ -49,9 +49,14 @@ const DetailsPage = () => {
 
   if (loading) {
     return (
-      <Container>
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        height='100vh'
+      >
         <CircularProgress />
-      </Container>
+      </Box>
     );
   }
 
