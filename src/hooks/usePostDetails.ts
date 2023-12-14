@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPost, updatePost, deletePost } from '../api/postsApi';
 
-export const usePostDetails = () => {
+export const usePostDetails = (onUpdateSuccess, onDeleteSuccess) => {
   const [post, setPost] = useState({ title: '', body: '' });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
@@ -20,18 +20,40 @@ export const usePostDetails = () => {
 
   const handleUpdate = async () => {
     setLoading(true);
-    console.log('Updating post:', post);
-    await updatePost(parseInt(id), post);
-    setLoading(false);
-    navigate('/');
+    try {
+      await updatePost(parseInt(id), post);
+      console.log('Updated post:', post);
+      if (onUpdateSuccess) {
+        onUpdateSuccess(
+          'Update Successful',
+          'The post has been updated successfully.'
+        );
+        setTimeout(() => navigate('/'), 2100);
+      }
+    } catch (error) {
+      console.error('Error updating post:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = async () => {
     setLoading(true);
-    console.log('Deleting post with ID:', id);
-    await deletePost(parseInt(id));
-    setLoading(false);
-    navigate('/');
+    try {
+      await deletePost(parseInt(id));
+      console.log('Deleted post with ID:', id);
+      if (onDeleteSuccess) {
+        onDeleteSuccess(
+          'Delete Successful',
+          'The post has been deleted successfully.'
+        );
+        setTimeout(() => navigate('/'), 2100);
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBackToHome = () => {

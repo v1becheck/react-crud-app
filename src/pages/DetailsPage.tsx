@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { usePostDetails } from '../hooks/usePostDetails';
 import {
   TextField,
@@ -7,9 +7,23 @@ import {
   Typography,
   Box,
   CircularProgress,
+  Modal,
+  Backdrop,
+  Fade,
 } from '@mui/material';
 
 const DetailsPage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+
+  const handleSuccess = (title, message) => {
+    setModalTitle(title);
+    setModalMessage(message);
+    setShowModal(true);
+    setTimeout(() => setShowModal(false), 2000);
+  };
+
   const {
     post,
     setPost,
@@ -17,7 +31,18 @@ const DetailsPage = () => {
     handleUpdate,
     handleDelete,
     handleBackToHome,
-  } = usePostDetails();
+  } = usePostDetails(
+    () =>
+      handleSuccess(
+        'Update Successful',
+        'The post has been updated successfully.'
+      ),
+    () =>
+      handleSuccess(
+        'Delete Successful',
+        'The post has been deleted successfully.'
+      )
+  );
 
   if (loading) {
     return (
@@ -78,6 +103,31 @@ const DetailsPage = () => {
           Back to Home
         </Button>
       </Box>
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+      >
+        <Fade in={showModal}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper',
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+            }}
+          >
+            <Typography variant='h6'>{modalTitle}</Typography>
+            <Typography>{modalMessage}</Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </Container>
   );
 };
