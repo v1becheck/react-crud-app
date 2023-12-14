@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useFetchPosts } from '../hooks/useFetchPosts';
 import { Link as RouterLink } from 'react-router-dom';
-import { fetchPosts } from '../api/postsApi';
+
 import {
   Container,
   Grid,
@@ -11,15 +12,7 @@ import {
 } from '@mui/material';
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchPosts().then((response) => {
-      setPosts(response.data);
-      setLoading(false);
-    });
-  }, []);
+  const { posts, loading } = useFetchPosts();
 
   const limitedPosts = useMemo(() => posts.slice(0, 15), [posts]);
 
@@ -40,9 +33,23 @@ const HomePage = () => {
 
   return (
     <Container sx={{ padding: '16px' }}>
-      <Typography variant='h4' gutterBottom>
-        Post Listing
-      </Typography>
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        mb={2}
+      >
+        <Typography variant='h4'>Posts</Typography>
+        <Button
+          component={RouterLink}
+          to='/create'
+          variant='contained'
+          color='primary'
+        >
+          Create Post
+        </Button>
+      </Box>
+
       <Grid container spacing={3}>
         {limitedPosts.map((post) => (
           <Grid item key={post.id} xs={12} sm={6} md={4}>

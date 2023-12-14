@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createPost } from '../api/postsApi';
+import React from 'react';
+import { useCreatePost } from '../hooks/useCreatePost';
 import {
   TextField,
   Button,
@@ -11,22 +10,15 @@ import {
 } from '@mui/material';
 
 const CreatePage = () => {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    await createPost({ title, body });
-    setLoading(false);
-    navigate('/');
-  };
-
-  const handleBackToHome = () => {
-    navigate('/');
-  };
+  const {
+    title,
+    setTitle,
+    body,
+    setBody,
+    loading,
+    handleSubmit,
+    handleBackToHome,
+  } = useCreatePost();
 
   return (
     <Container>

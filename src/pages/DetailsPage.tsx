@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useFetchPosts } from '../hooks/useFetchPosts';
 import { fetchPost, updatePost, deletePost } from '../api/postsApi';
 import {
   TextField,
