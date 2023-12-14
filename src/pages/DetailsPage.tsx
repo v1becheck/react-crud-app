@@ -16,12 +16,36 @@ const DetailsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModalMessage] = useState('');
+  const [titleError, setTitleError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
 
   const handleSuccess = (title, message) => {
     setModalTitle(title);
     setModalMessage(message);
     setShowModal(true);
     setTimeout(() => setShowModal(false), 2000);
+  };
+
+  const validateAndUpdate = () => {
+    let isValid = true;
+
+    if (!post.title.trim()) {
+      setTitleError(true);
+      isValid = false;
+    } else {
+      setTitleError(false);
+    }
+
+    if (!post.body.trim()) {
+      setBodyError(true);
+      isValid = false;
+    } else {
+      setBodyError(false);
+    }
+
+    if (isValid) {
+      handleUpdate();
+    }
   };
 
   const {
@@ -64,6 +88,8 @@ const DetailsPage = () => {
       </Typography>
       <Box sx={{ mt: 1 }}>
         <TextField
+          error={titleError}
+          helperText={titleError ? "Title can't be empty" : ''}
           margin='normal'
           fullWidth
           label='Title'
@@ -71,6 +97,8 @@ const DetailsPage = () => {
           onChange={(e) => setPost({ ...post, title: e.target.value })}
         />
         <TextField
+          error={bodyError}
+          helperText={bodyError ? "Body can't be empty" : ''}
           margin='normal'
           fullWidth
           label='Body'
@@ -83,7 +111,7 @@ const DetailsPage = () => {
           variant='contained'
           color='primary'
           sx={{ mt: 3, mb: 2, mr: 2 }}
-          onClick={handleUpdate}
+          onClick={validateAndUpdate}
         >
           Update
         </Button>

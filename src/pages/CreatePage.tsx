@@ -14,6 +14,9 @@ import {
 
 const CreatePage = () => {
   const [showModal, setShowModal] = useState(false);
+  const [titleError, setTitleError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
+
   const handleSuccess = () => {
     setShowModal(true);
     setTimeout(() => setShowModal(false), 2000);
@@ -25,9 +28,32 @@ const CreatePage = () => {
     body,
     setBody,
     loading,
-    handleSubmit,
+    handleSubmit: originalHandleSubmit,
     handleBackToHome,
   } = useCreatePost(handleSuccess);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    if (!title.trim()) {
+      setTitleError(true);
+      isValid = false;
+    } else {
+      setTitleError(false);
+    }
+
+    if (!body.trim()) {
+      setBodyError(true);
+      isValid = false;
+    } else {
+      setBodyError(false);
+    }
+
+    if (isValid) {
+      originalHandleSubmit(e);
+    }
+  };
 
   return (
     <Container>
@@ -36,6 +62,8 @@ const CreatePage = () => {
       </Typography>
       <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
         <TextField
+          error={titleError}
+          helperText={titleError ? "Title can't be empty" : ''}
           margin='normal'
           required
           fullWidth
@@ -45,6 +73,8 @@ const CreatePage = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
+          error={bodyError}
+          helperText={bodyError ? "Body can't be empty" : ''}
           margin='normal'
           required
           fullWidth
