@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchPost, updatePost, deletePost } from '../api/postsApi';
 
-export const usePostDetails = (onUpdateSuccess, onDeleteSuccess) => {
+export const usePostDetails = (
+  onUpdateSuccess: (title: string, message: string) => void,
+  onDeleteSuccess: (title: string, message: string) => void
+) => {
   const [post, setPost] = useState({ title: '', body: '' });
   const [loading, setLoading] = useState(true);
   const { id } = useParams();

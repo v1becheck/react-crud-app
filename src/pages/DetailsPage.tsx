@@ -107,8 +107,12 @@ const DetailsPage = () => {
         open={showModal}
         onClose={() => setShowModal(false)}
         closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{ timeout: 500 }}
+        components={{
+          Backdrop: Backdrop,
+        }}
+        componentsProps={{
+          backdrop: { timeout: 500 },
+        }}
       >
         <Fade in={showModal}>
           <Box
