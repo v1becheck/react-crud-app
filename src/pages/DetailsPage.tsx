@@ -61,7 +61,7 @@ const DetailsPage = () => {
   }
 
   return (
-    <Container>
+    <Container sx={{ padding: '16px' }}>
       <Typography variant='h4' gutterBottom>
         Post Details
       </Typography>

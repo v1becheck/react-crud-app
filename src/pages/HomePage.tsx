@@ -3,13 +3,11 @@ import { Link as RouterLink } from 'react-router-dom';
 import { fetchPosts } from '../api/postsApi';
 import {
   Container,
+  Grid,
   Typography,
-  List,
-  ListItem,
-  ListItemText,
   Button,
-  Box,
   CircularProgress,
+  Box,
 } from '@mui/material';
 
 const HomePage = () => {
@@ -39,35 +37,40 @@ const HomePage = () => {
   }
 
   return (
-    <Container>
-      <Box
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
-        mb={2}
-      >
-        <Typography variant='h4'>Posts</Typography>
-        <Button
-          variant='contained'
-          color='primary'
-          component={RouterLink}
-          to='/create'
-        >
-          Create Post
-        </Button>
-      </Box>
-      <List>
+    <Container sx={{ padding: '16px' }}>
+      <Typography variant='h4' gutterBottom>
+        Post Listing
+      </Typography>
+      <Grid container spacing={3}>
         {posts.map((post) => (
-          <ListItem
-            key={post.id}
-            button
-            component={RouterLink}
-            to={`/details/${post.id}`}
-          >
-            <ListItemText primary={post.title} />
-          </ListItem>
+          <Grid item key={post.id} xs={12} sm={6} md={4}>
+            <Container
+              sx={{
+                border: '1px solid #ddd',
+                borderRadius: '8px',
+                padding: '16px',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <Typography variant='h6' gutterBottom>
+                {post.title}
+              </Typography>
+              <Typography>{post.body}</Typography>
+              <Button
+                component={RouterLink}
+                to={`/details/${post.id}`}
+                variant='outlined'
+                color='primary'
+                sx={{ marginTop: 'auto' }}
+              >
+                View Details
+              </Button>
+            </Container>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Container>
   );
 };
