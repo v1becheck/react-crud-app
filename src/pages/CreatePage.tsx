@@ -24,6 +24,10 @@ const CreatePage = () => {
     navigate('/');
   };
 
+  const handleBackToHome = () => {
+    navigate('/');
+  };
+
   return (
     <Container>
       <Typography variant='h4' gutterBottom>
@@ -57,6 +61,9 @@ const CreatePage = () => {
           disabled={loading}
         >
           {loading ? <CircularProgress size={24} /> : 'Create'}
+        </Button>
+        <Button variant='outlined' sx={{ mt: 2 }} onClick={handleBackToHome}>
+          Back to Home
         </Button>
       </Box>
     </Container>
