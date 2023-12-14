@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { fetchPosts } from '../api/postsApi';
 import {
@@ -21,6 +21,8 @@ const HomePage = () => {
     });
   }, []);
 
+  const limitedPosts = useMemo(() => posts.slice(0, 15), [posts]);
+
   if (loading) {
     return (
       <Container>
@@ -42,7 +44,7 @@ const HomePage = () => {
         Post Listing
       </Typography>
       <Grid container spacing={3}>
-        {posts.slice(0, 15).map((post) => (
+        {limitedPosts.map((post) => (
           <Grid item key={post.id} xs={12} sm={6} md={4}>
             <Container
               sx={{
