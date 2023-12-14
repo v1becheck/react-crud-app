@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const apiBase = 'https://jsonplaceholder.typicode.com/posts';
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
-export const fetchPosts = () => axios.get(apiBase);
-export const fetchPost = (id: number) => axios.get(`${apiBase}/${id}`);
-export const createPost = (data: object) => axios.post(apiBase, data);
+export const fetchPosts = () => axios.get(API_BASE);
+export const fetchPost = (id: number) => axios.get(`${API_BASE}/${id}`);
+export const createPost = (data: object) => axios.post(API_BASE, data);
 export const updatePost = (id: number, data: object) =>
-  axios.put(`${apiBase}/${id}`, data);
-export const deletePost = (id: number) => axios.delete(`${apiBase}/${id}`);
+  axios.put(`${API_BASE}/${id}`, data);
+export const deletePost = (id: number) => axios.delete(`${API_BASE}/${id}`);

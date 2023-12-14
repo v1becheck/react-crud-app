@@ -11,6 +11,7 @@ import {
   Backdrop,
   Fade,
 } from '@mui/material';
+import DOMPurify from 'dompurify';
 
 const CreatePage = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +21,14 @@ const CreatePage = () => {
   const handleSuccess = () => {
     setShowModal(true);
     setTimeout(() => setShowModal(false), 2000);
+  };
+
+  const handleTitleChange = (e) => {
+    setTitle(DOMPurify.sanitize(e.target.value));
+  };
+
+  const handleBodyChange = (e) => {
+    setBody(DOMPurify.sanitize(e.target.value));
   };
 
   const {
@@ -70,7 +79,7 @@ const CreatePage = () => {
           label='Title'
           autoFocus
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={handleTitleChange}
         />
         <TextField
           error={bodyError}
@@ -82,7 +91,7 @@ const CreatePage = () => {
           multiline
           rows={4}
           value={body}
-          onChange={(e) => setBody(e.target.value)}
+          onChange={handleBodyChange}
         />
         <Button
           type='submit'

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePostDetails } from '../hooks/usePostDetails';
+import DOMPurify from 'dompurify';
 import {
   TextField,
   Button,
@@ -68,6 +69,16 @@ const DetailsPage = () => {
       )
   );
 
+  const handleTitleChange = (e) => {
+    const sanitizedTitle = DOMPurify.sanitize(e.target.value);
+    setPost({ ...post, title: sanitizedTitle });
+  };
+
+  const handleBodyChange = (e) => {
+    const sanitizedBody = DOMPurify.sanitize(e.target.value);
+    setPost({ ...post, body: sanitizedBody });
+  };
+
   if (loading) {
     return (
       <Box
@@ -94,7 +105,7 @@ const DetailsPage = () => {
           fullWidth
           label='Title'
           value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          onChange={handleTitleChange}
         />
         <TextField
           error={bodyError}
@@ -105,7 +116,7 @@ const DetailsPage = () => {
           multiline
           rows={4}
           value={post.body}
-          onChange={(e) => setPost({ ...post, body: e.target.value })}
+          onChange={handleBodyChange}
         />
         <Button
           variant='contained'
