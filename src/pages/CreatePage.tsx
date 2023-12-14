@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCreatePost } from '../hooks/useCreatePost';
 import {
   TextField,
@@ -7,9 +7,18 @@ import {
   Typography,
   Box,
   CircularProgress,
+  Modal,
+  Backdrop,
+  Fade,
 } from '@mui/material';
 
 const CreatePage = () => {
+  const [showModal, setShowModal] = useState(false);
+  const handleSuccess = () => {
+    setShowModal(true);
+    setTimeout(() => setShowModal(false), 2000);
+  };
+
   const {
     title,
     setTitle,
@@ -18,7 +27,7 @@ const CreatePage = () => {
     loading,
     handleSubmit,
     handleBackToHome,
-  } = useCreatePost();
+  } = useCreatePost(handleSuccess);
 
   return (
     <Container>
@@ -58,6 +67,31 @@ const CreatePage = () => {
           Back to Home
         </Button>
       </Box>
+
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{ timeout: 500 }}
+      >
+        <Fade in={showModal}>
+          <Box
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              bgcolor: 'background.paper',
+              boxShadow: 24,
+              p: 4,
+              borderRadius: 2,
+            }}
+          >
+            <Typography variant='h6'>Post Created Successfully</Typography>
+          </Box>
+        </Fade>
+      </Modal>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPost } from '../api/postsApi';
 
-export const useCreatePost = () => {
+export const useCreatePost = (onSuccess) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [loading, setLoading] = useState(false);
@@ -11,9 +11,20 @@ export const useCreatePost = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await createPost({ title, body });
-    setLoading(false);
-    navigate('/');
+    try {
+      const response = await createPost({ title, body });
+      console.log('Created post:', response.data);
+      if (onSuccess) {
+        onSuccess();
+        setTimeout(() => navigate('/'), 2100);
+      } else {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error creating post:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBackToHome = () => {

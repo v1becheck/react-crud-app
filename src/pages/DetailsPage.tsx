@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useFetchPosts } from '../hooks/useFetchPosts';
-import { fetchPost, updatePost, deletePost } from '../api/postsApi';
+import React from 'react';
+import { usePostDetails } from '../hooks/usePostDetails';
 import {
   TextField,
   Button,
@@ -12,41 +10,14 @@ import {
 } from '@mui/material';
 
 const DetailsPage = () => {
-  const [post, setPost] = useState({ title: '', body: '' });
-  const [loading, setLoading] = useState(true);
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (id) {
-      fetchPost(parseInt(id)).then((response) => {
-        setPost(response.data);
-        setLoading(false);
-      });
-    }
-  }, [id]);
-
-  const handleUpdate = async () => {
-    setLoading(true);
-    if (id) {
-      await updatePost(parseInt(id), post);
-      setLoading(false);
-      navigate('/');
-    }
-  };
-
-  const handleDelete = async () => {
-    setLoading(true);
-    if (id) {
-      await deletePost(parseInt(id));
-      setLoading(false);
-      navigate('/');
-    }
-  };
-
-  const handleBackToHome = () => {
-    navigate('/');
-  };
+  const {
+    post,
+    setPost,
+    loading,
+    handleUpdate,
+    handleDelete,
+    handleBackToHome,
+  } = usePostDetails();
 
   if (loading) {
     return (

@@ -13,7 +13,7 @@ import DetailsPage from './pages/DetailsPage';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#f4efeb',
+      main: '#1976D2',
     },
     secondary: {
       main: '#9d6556',
