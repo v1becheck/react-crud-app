@@ -24,6 +24,7 @@ Make sure you have the following software installed:
 
 - [Node.js](https://nodejs.org/) - JavaScript runtime
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) - Package manager
+- [Docker](https://www.docker.com/products/docker-desktop/) - Container Development (Optional)
 
 ### Installation
 
