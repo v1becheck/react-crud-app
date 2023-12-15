@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useFetchPosts } from '../hooks/useFetchPosts';
 import { Link as RouterLink } from 'react-router-dom';
+import { Post } from '../types/postTypes';
 
 import {
   Container,
@@ -51,7 +52,7 @@ const HomePage = () => {
       </Box>
 
       <Grid container spacing={3}>
-        {limitedPosts.map((post) => (
+        {limitedPosts.map((post: Post) => (
           <Grid item key={post.id} xs={12} sm={6} md={4}>
             <Container
               sx={{
