@@ -29,9 +29,9 @@ Make sure you have the following software installed:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/react-crud-app.git
-   ```
+ ```bash
+ git clone https://github.com/your-username/react-crud-app.git
+ ```
 
 2. Navigate to the project directory:
 
@@ -63,13 +63,15 @@ npm test
 
 ## Deployment
 
-Vercel:
+App is deployed to Vercel<br>
+
+Vercel link:
 
 ## Built With
 
-React - JavaScript library for building user interfaces
-Vite - React project boilerplate
-Material-UI - React UI framework
+React - JavaScript library for building user interfaces<br>
+Vite - React project boilerplate<br>
+Material-UI - React UI framework<br>
 
 ## Contributing
 
