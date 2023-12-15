@@ -24,9 +24,9 @@ export const usePostDetails = (
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      await updatePost(parseInt(id), post);
-      console.log('Updated post:', post);
-      if (onUpdateSuccess && id) {
+      if (id) {
+        await updatePost(parseInt(id), post);
+        console.log('Updated post:', post);
         onUpdateSuccess(id, 'The post has been updated successfully.');
         setTimeout(() => navigate('/'), 2100);
       }
@@ -40,9 +40,9 @@ export const usePostDetails = (
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await deletePost(parseInt(id));
-      console.log('Deleted post with ID:', id);
-      if (onDeleteSuccess && id) {
+      if (id) {
+        await deletePost(parseInt(id));
+        console.log('Deleted post with ID:', id);
         onDeleteSuccess(id, 'The post has been deleted successfully.');
         setTimeout(() => navigate('/'), 2100);
       }
