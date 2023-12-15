@@ -77,6 +77,7 @@ const CreatePage = () => {
           required
           fullWidth
           label='Title'
+          placeholder='Title'
           autoFocus
           value={title}
           onChange={handleTitleChange}
@@ -88,6 +89,7 @@ const CreatePage = () => {
           required
           fullWidth
           label='Body'
+          placeholder='Body'
           multiline
           rows={4}
           value={body}
