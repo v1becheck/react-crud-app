@@ -63,13 +63,15 @@ npm test
 
 ## Deployment
 
-Vercel:
+App is deployed to Vercel<br>
+
+Vercel link:
 
 ## Built With
 
-React - JavaScript library for building user interfaces
-Vite - React project boilerplate
-Material-UI - React UI framework
+React - JavaScript library for building user interfaces<br>
+Vite - React project boilerplate<br>
+Material-UI - React UI framework<br>
 
 ## Contributing
 
