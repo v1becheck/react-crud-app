@@ -65,7 +65,7 @@ npm test
 
 App is deployed to Vercel<br>
 
-Vercel link:
+Vercel link: https://react-crud-bdf8uu691-ecoexplorer.vercel.app/
 
 ## Built With
 
