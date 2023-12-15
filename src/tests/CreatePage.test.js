@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CreatePage from '../pages/CreatePage';
 
-// Mock the specific functions and properties from useCreatePost
+import jest from 'jest';
+
 jest.mock('../hooks/useCreatePost', () => ({
   useCreatePost: () => ({
     title: '',

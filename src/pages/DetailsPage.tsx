@@ -20,7 +20,7 @@ const DetailsPage = () => {
   const [titleError, setTitleError] = useState(false);
   const [bodyError, setBodyError] = useState(false);
 
-  const handleSuccess = (title, message) => {
+  const handleSuccess = (title: string, message: string) => {
     setModalTitle(title);
     setModalMessage(message);
     setShowModal(true);
@@ -69,12 +69,12 @@ const DetailsPage = () => {
       )
   );
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const sanitizedTitle = DOMPurify.sanitize(e.target.value);
     setPost({ ...post, title: sanitizedTitle });
   };
 
-  const handleBodyChange = (e) => {
+  const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const sanitizedBody = DOMPurify.sanitize(e.target.value);
     setPost({ ...post, body: sanitizedBody });
   };

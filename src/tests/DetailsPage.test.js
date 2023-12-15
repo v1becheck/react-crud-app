@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'; // Import to use toBeInTheDocument
 
 import DetailsPage from '../pages/DetailsPage';
 import { usePostDetails } from '../hooks/usePostDetails';
+
+import jest from 'jest';
 
 jest.mock('../hooks/usePostDetails', () => ({
   usePostDetails: jest.fn(),

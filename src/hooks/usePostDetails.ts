@@ -26,11 +26,8 @@ export const usePostDetails = (
     try {
       await updatePost(parseInt(id), post);
       console.log('Updated post:', post);
-      if (onUpdateSuccess) {
-        onUpdateSuccess(
-          'Update Successful',
-          'The post has been updated successfully.'
-        );
+      if (onUpdateSuccess && id) {
+        onUpdateSuccess(id, 'The post has been updated successfully.');
         setTimeout(() => navigate('/'), 2100);
       }
     } catch (error) {
@@ -45,11 +42,8 @@ export const usePostDetails = (
     try {
       await deletePost(parseInt(id));
       console.log('Deleted post with ID:', id);
-      if (onDeleteSuccess) {
-        onDeleteSuccess(
-          'Delete Successful',
-          'The post has been deleted successfully.'
-        );
+      if (onDeleteSuccess && id) {
+        onDeleteSuccess(id, 'The post has been deleted successfully.');
         setTimeout(() => navigate('/'), 2100);
       }
     } catch (error) {

@@ -23,11 +23,11 @@ const CreatePage = () => {
     setTimeout(() => setShowModal(false), 2000);
   };
 
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(DOMPurify.sanitize(e.target.value));
   };
 
-  const handleBodyChange = (e) => {
+  const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBody(DOMPurify.sanitize(e.target.value));
   };
 
@@ -41,7 +41,7 @@ const CreatePage = () => {
     handleBackToHome,
   } = useCreatePost(handleSuccess);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     let isValid = true;
 
